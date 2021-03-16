@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faking Textarea on Typing</title>
+</head>
+<body>
+    <center>
+        <h3>Enter your opinion about Death Note vs. Code Geass</h3>
+        <form>
+            <textarea id="txt" cols="40" rows="10" onkeydown="typeText();"></textarea>
+        </form>
+    </center>
+</body>
+</html>
+<script>
+    let constant = 'Code Geass is an edgy trash, while Death Note is a masterpiece';
+    let str = [];
+    let count = 0;
+    for (let letter in constant){
+        str.push(constant[letter]);
+        count++;
+    }
+    let text = '';
+    function typeText(){
+        let input  = document.getElementById('txt').value;
+        if (input.length > 0){
+            for (let i = 0; i < input.length; i++){
+                text = text + str[i];
+                if(i >= count) {
+                    document.getElementById('txt').value = '';
+                    text = '';
+                }
+            }
+        }
+        document.getElementById('txt').value = text;
+        text = '';
+        setTimeout("typeText()", 0.033);
+    }
+</script>
